@@ -1,0 +1,1 @@
+An attempt to compare simulators. Isaac is currently diverging, but it's also doing it very slowly :D
