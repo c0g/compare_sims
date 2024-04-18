@@ -1,0 +1,29 @@
+<mujoco>
+  <option timestep=".001">
+  </option>
+  <asset>
+    <texture name="grid" type="2d" builtin="checker" rgb1=".1 .2 .3" rgb2=".2 .3 .4" width="640" height="480"/>
+    <material name="grid" texture="grid" texrepeat="8 8" reflectance=".2"/>
+  </asset>
+  <worldbody>
+    <geom name="floor" type="plane" pos="0 0 -5" size="20 20 .1" material="grid"/>
+    <light pos="0 -.4 1"/>
+    <body name="oleg" pos="0 0 0">
+      <body name="thigh" pos="0 0 0">
+        <joint type="slide" axis="1 0 0" pos="0 0 0" limited="true" range="-10 10"/>
+        <joint type="slide" axis="0 0 1" pos="0 0 0" limited="true" range="-10 0"/>
+        <joint name="thigh_joint" type="hinge" axis="0 -1 0" pos="0 0 6" limited="true" range="-60 60"/>
+        <joint type="hinge" axis="-1 0 0" pos="0 0 6" limited="true" range="-5 5"/>
+        <geom pos="0 0 4" type="box" size="0.2 0.1 2.0" rgba="1 1 0 1" mass="0.5"/>
+        <body name="calf" pos="0 0 0">
+          <joint name="knee_joint" axis="0 -1 0" pos="0 0 2"/>
+          <geom pos="0 0 0" type="box" size="0.2 0.1 2.0" rgba="1 0 0 1" mass="0.3"/>
+        </body>
+      </body>
+    </body>
+  </worldbody>
+  <actuator>
+    <motor name='thigh_motor' ctrllimited="true" ctrlrange="-100.0 100.0" joint="thigh_joint"/>
+    <motor name='knee_motor' ctrllimited="true" ctrlrange="-100.0 100.0" joint="knee_joint"/>
+  </actuator>
+</mujoco>
